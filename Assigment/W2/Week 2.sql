@@ -211,41 +211,10 @@ ORDER BY COUNT_ORDERS DESC;
 
 
 
-/*Week 3 Assignment: Business Performance
-Analysis*/
 
-/*Question 1 – Key Revenue Drivers
-Which customers contribute the most revenue to the business, and how frequently do they
-purchase?*/
 
-SELECT
-    B.NAME,
-    COUNT(B.NAME) AS NO_SALES,
-    SUM(A.TOTAL_AMT_USD) AS VALUE
-FROM ORDERS A
-JOIN ACCOUNTS B
-    ON A.ACCOUNT_ID = B.ID
-GROUP BY B.NAME
-ORDER BY VALUE DESC;
 
-/*Question 3 – Regional Business Review*/
 
-SELECT
-    D.NAME,
-    SUM(A.TOTAL_AMT_USD) AS VALUE,
-    COUNT(B.NAME) AS CUSTOMER_ACQUISITION,
-    AVG(A.TOTAL_AMT_USD) AS AVERAGE_ORDER_VALUE
-FROM ORDERS A
-JOIN ACCOUNTS B
-    ON A.ACCOUNT_ID = B.ID
-JOIN SALES_REPS C
-    ON B.SALES_REP_ID = C.ID
-JOIN REGION D
-    ON C.REGION_ID = D.ID
-GROUP BY D.NAME
-ORDER BY AVERAGE_ORDER_VALUE DESC;
-
-/*Question 4 – Strategic Customer Identification*/
 
 
 
