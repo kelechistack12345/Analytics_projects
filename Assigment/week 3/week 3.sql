@@ -118,8 +118,49 @@ order by
  /*Question 6 – Above-Average Customers
 Which customers are outperforming the average customer in terms of revenue generated?*/   
 
+with customer_revenue as (
+    select
+        a.id as customer_id,
+        a.name as customer_name,
+        sum(o.total_amt_usd) as total_revenue
+    from accounts a
+    join orders o
+        on a.id = o.account_id
+    group by a.id, a.name
+),
+avg_revenue as (
+    select avg(total_revenue) as avg_rev
+    from customer_revenue
+)
+select
+    cr.customer_id,
+    cr.customer_name,
+    cr.total_revenue
+from customer_revenue cr
+cross join avg_revenue ar
+where cr.total_revenue > ar.avg_rev
+order by cr.total_revenue desc;
+
 
 
   
+/*Question 7 – Customer Engagement Assessment
+Which customers appear to be the most digitally engaged based on their interactions across
+marketing channels?*/
 
+select 
+c.channel,
+b.name,
+count(c.id) no_customers
+from 
+  orders a 
+  join accounts b on a.account_id = b.id 
+  join web_events c on b.id = c.account_id
+  where c.channel not in ('direct', 'banner')
+group by 
+b.name,
+c.channel
+order by
+no_customers
+desc;
 
