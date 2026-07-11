@@ -1,0 +1,11 @@
+version : 2 
+sources : 
+  - name : raw
+    database : ASSIGMENT_DB
+    schema :   raw
+    tables : 
+      - name : accounts_ma
+      - name : orders_ma
+      - name : sales_reps_ma
+      - name : web_events
+      - name : region_ma
