@@ -1,0 +1,24 @@
+ersion: 2
+
+models:
+  - name: stg_accounts
+    description: Cleaned customer data.
+
+    columns:
+
+      - name: account_id
+        description: Primary key for customers.
+        tests:
+          - unique
+          - not_null
+
+      - name: account_name
+        description: Customer name.
+        tests:
+          - not_null
+
+      - name: sales_rep_id
+        tests:
+          - relationships:
+              to: ref('dim_sales_rep')
+              field: sales_rep_id
